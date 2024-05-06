@@ -1,0 +1,25 @@
+.whiteboard-nav {
+    width: 100vw;
+}
+
+.whiteboard-nav-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #5b5959;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.whiteboard-nav-btn {
+    margin-right: 10px;
+}
+
+.whiteboard-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.whiteboard-canvas {
+    border: 2px solid red;
+}
