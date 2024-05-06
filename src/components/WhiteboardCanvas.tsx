@@ -28,10 +28,8 @@ const WhiteboardCanvas = () => {
 
     const updateShapePosition = (x: number, y: number, id: string) => {
 
-
         const updatedPosition: Shape[] = shapes.map((rectangle) => {
             if (rectangle.id === id) {
-                console.log(rectangle)
                 return {
                     ...rectangle,
                     x: x,
@@ -92,6 +90,9 @@ const WhiteboardCanvas = () => {
     }
 
     const onPointerUp = (e: Konva.KonvaEventObject<PointerEvent>) => {
+
+        if (!isPaining) return;
+
         updateHistory();
         setSelectedShapeTool('');
         updateIsPainting(false);
