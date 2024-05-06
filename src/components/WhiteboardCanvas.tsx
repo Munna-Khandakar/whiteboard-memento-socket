@@ -2,10 +2,13 @@ import Konva from "konva";
 import {useRef} from "react";
 import {Layer, Rect, Stage} from "react-konva";
 import {v4 as uuidv4} from "uuid";
+import useSocket from "../hooks/useSocket.ts";
 import {useShapeStore} from "../stores/shapeStore.ts";
 import {Shape} from "../type/Shape.ts";
 
 const WhiteboardCanvas = () => {
+
+    const {isConnected, error, emit, on} = useSocket('http://localhost:4000');
 
     const stageRef = useRef(null);
     const currentShapeId = useRef();
@@ -23,14 +26,16 @@ const WhiteboardCanvas = () => {
 
     const updateIsPainting = useShapeStore(state => state.updateIsPainting);
 
-    const updateShapePosition = (id: string) => {
+    const updateShapePosition = (x: number, y: number, id: string) => {
+
 
         const updatedPosition: Shape[] = shapes.map((rectangle) => {
             if (rectangle.id === id) {
+                console.log(rectangle)
                 return {
                     ...rectangle,
-                    x: rectangle.x,
-                    y: rectangle.y,
+                    x: x,
+                    y: y,
                 };
             }
             return rectangle;
@@ -92,8 +97,10 @@ const WhiteboardCanvas = () => {
         updateIsPainting(false);
     }
 
-    const onDragEnd = (shapeId: string) => {
-        updateShapePosition(shapeId)
+    const onDragEnd = (e: Konva.KonvaEventObject<PointerEvent>, shapeId: string) => {
+        const newX = e.target.x();
+        const newY = e.target.y();
+        updateShapePosition(newX, newY, shapeId)
         updateHistory()
     }
 
@@ -119,7 +126,7 @@ const WhiteboardCanvas = () => {
                                 height={shape.height}
                                 fill="red"
                                 draggable
-                                onDragEnd={() => onDragEnd(shape.id)}
+                                onDragEnd={(e) => onDragEnd(e, shape.id)}
                                 shadowBlur={10}
                             />
                         ))

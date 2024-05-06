@@ -33,6 +33,7 @@ export const useShapeStore = create<ShapeState>((set, get) => ({
             shapes: [...existingShapes, newShape],
         });
     },
+
     updateShapes: (shapes) => {
         set({shapes});
     },
