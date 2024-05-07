@@ -1,5 +1,7 @@
 .whiteboard-nav {
+    z-index: 1;
     width: 100vw;
+    position: fixed;
 }
 
 .whiteboard-nav-items {
@@ -21,5 +23,5 @@
 }
 
 .whiteboard-canvas {
-    border: 2px solid red;
+    /*overflow: hidden;*/
 }

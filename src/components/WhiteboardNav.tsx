@@ -7,9 +7,8 @@ const WhiteboardNav = () => {
             <div className="whiteboard-nav-items">
                 <button className="whiteboard-nav-btn" onClick={undo}>Undo</button>
                 <button className="whiteboard-nav-btn" onClick={redo}>Redo</button>
-                <button className="whiteboard-nav-btn">Clear</button>
 
-                <button className="whiteboard-nav-btn" onClick={() => setSelectedShapeTool('rect')}>Add Rect
+                <button className="whiteboard-nav-btn" onClick={() => setSelectedShapeTool('rect')}>Add Rectangle
                 </button>
             </div>
         </div>
